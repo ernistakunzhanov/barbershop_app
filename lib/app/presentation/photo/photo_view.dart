@@ -8,21 +8,10 @@ class PhotoView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         centerTitle: true,
-        title: const Text(
-          'My jobs',
-          style: TextStyle(fontSize: 25),
-        ),
-      ),
-      body: const Center(
-        child: Text(
-          'My jobs view',
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-          ),
-        ),
+        elevation: 0,
+        title: const Text('ФОТО'),
       ),
     );
   }
