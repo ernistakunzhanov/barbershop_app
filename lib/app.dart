@@ -1,4 +1,5 @@
 import 'package:barbershop_app/app/presentation/home/home_view.dart';
+import 'package:barbershop_app/app/presentation/main/main_view.dart';
 import 'package:flutter/material.dart';
 
 class BarbershopApp extends StatelessWidget {
@@ -8,7 +9,7 @@ class BarbershopApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home: MainView(),
     );
   }
 }

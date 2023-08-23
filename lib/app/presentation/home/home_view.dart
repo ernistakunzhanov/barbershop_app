@@ -1,3 +1,5 @@
+import 'package:barbershop_app/app/presentation/enroll/enroll_view.dart';
+import 'package:barbershop_app/app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -9,63 +11,65 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: const AssetImage('assets/images/bgFon.jpg'),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.4),
-            BlendMode.darken,
-          ),
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              CircleAvatar(
-                backgroundColor: Colors.white.withOpacity(0.7),
-                radius: 100,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  color: Colors.black,
-                ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.white.withOpacity(0.7),
+              radius: 100,
+              child: Image.asset(
+                'assets/images/logo.png',
+                color: Colors.black,
               ),
-              const SizedBox(height: 120),
-              Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      fixedSize:
-                          Size(MediaQuery.of(context).size.width * 0.8, 40),
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4), // <-- Radius
+            ),
+            const SizedBox(height: 120),
+            Column(
+              children: [
+                CustomButton(
+                  title: 'Записаться',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EnrollView(),
                       ),
-                    ),
-                    child: Text(
-                      'Записаться'.toUpperCase(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: 200,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                ElevatedButton(
+                                  child: const Text('Вызов +996 (552) 542 556'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                ElevatedButton(
+                                  child: const Text('Отменить'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
                     height: 90,
                     width: 90,
                     decoration: BoxDecoration(
@@ -77,33 +81,11 @@ class _HomeViewState extends State<HomeView> {
                       fit: BoxFit.none,
                     ),
                   ),
-                  const SizedBox(height: 7),
-                ],
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          unselectedItemColor: Colors.white,
-          selectedItemColor: Colors.white,
-          backgroundColor: Colors.black.withOpacity(0.2),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.key_sharp),
-              label: 'МОИ ЗАПИСИ',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_add),
-              label: 'ЗАПИСАТЬСЯ',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt),
-              label: 'ФОТО',
+                ),
+                const SizedBox(height: 7),
+              ],
             ),
           ],
-          currentIndex: _selectedIndex,
-          // selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
         ),
       ),
     );
